@@ -1,0 +1,35 @@
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spi";
+    cs-gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
+    pinctrl-0 = <&lora_default>;
+    pinctrl-1 = <&lora_sleep>;
+    pinctrl-names = "default", "sleep";
+    sx1262: sx1262@0 {
+        compatible = "semtech,sx1262";
+        reg = <0>;
+        spi-max-frequency = <DT_FREQ_M(2)>;
+        reset-gpios = <&gpio0 16 GPIO_ACTIVE_HIGH>;
+        dio1-gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
+        busy-gpios = <&gpio0 24 GPIO_ACTIVE_HIGH>;
+        dio2-tx-enable;
+    };
+};
+
+
+&pinctrl {
+   lora_default:lora_default{
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 6)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 26)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 25)>;
+        };
+    };
+    lora_sleep:lora_sleep{  
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 6)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 26)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 25)>;
+        };
+    };
+};
