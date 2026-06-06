@@ -1,50 +1,52 @@
-ISC-4012-B – LLCC68 LoRa Transmitter
-Description
+# ISC-4012-B – LLCC68 LoRa Transmitter
 
-This project is a LoRa transmit test application developed exclusively for the custom board ISC_4012-B using the SX1262 radio and Zephyr RTOS (SDK v3.2.2).
+## Description
 
-The application initializes the LoRa and periodically transmits a LoRa packet while printing transmission status logs.
+This project is a LoRa transmit test application developed exclusively for the custom board **ISC_4012-B** using the **SX1262/LLCC68 radio** and **Zephyr RTOS (SDK v3.2.2)**.
 
-SDK & Board
+The application initializes the LoRa module, periodically transmits LoRa packets, and prints transmission status logs for verification and debugging purposes.
 
-Zephyr / NCS SDK: v3.2.2
+---
 
-Target Board: EVK_ISC_4012_B
+## SDK & Board
 
-This firmware is only valid for ISC_4012-B.
+* **Zephyr / NCS SDK:** v3.2.2
+* **Target Board:** EVK_ISC_4012_B
 
-Project Structure (Relevant)
+This firmware is only valid for **ISC_4012-B**.
+
+---
+
+## Project Structure (Relevant)
+
+```text
 Lora_Transmit/
 ├── boards/EVK_ISC_4012_B/
 ├── dts/
-├── lib/ # LLCC68 driver
+├── lib/                 # LLCC68 driver
 ├── src/main.c
 ├── prj.conf
 └── CMakeLists.txt
+```
 
-Build
+---
 
-From the project root:
+## Functionality
 
-west build -b EVK_ISC_4012_B
+* Initializes the LoRa module
+* Periodically transmits a LoRa packet:
 
-Flash
-west flash
+```text
+transmitting LoRa Packet
+```
 
-Functionality
+* Configurable transmission interval
+* Logs transmission status and timing information
 
-Initializes LoRa Module
+---
 
-Transmits a LoRa packet:
+## Notes
 
-"transmitting LoRa Packet"
-
-Transmission interval: ms
-
-Logs TX status and timing
-
-Notes
-
-LLCC68 SPI and GPIOs are defined in custom DTS files
-
-Tested only with SDK v3.2.2 & 3.2.4
+* LLCC68 SPI and GPIO configurations are defined in the custom DTS files.
+* Tested and verified with **NCS SDK v3.2.2** and **v3.2.4**.
+* Intended for transmitter-side LoRa communication testing on the **ISC_4012-B** platform.
