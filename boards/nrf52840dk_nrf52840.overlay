@@ -1,0 +1,19 @@
+
+
+&i2s0 {
+	status = "okay";
+	sck-pin = <25>;
+	lrck-pin = <26>;
+	sdin-pin = <27>; /* INMP441 Data */
+	clock-source = "PCLK32M_HFXO";
+};
+
+/ {
+	buttons {
+		compatible = "gpio-keys";
+		ptt_button: ptt_button {
+			gpios = <&gpio0 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Push to Talk";
+		};
+	};
+};
