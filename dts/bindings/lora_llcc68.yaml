@@ -1,0 +1,6 @@
+description: |
+    Semtech lora device LLCC68
+
+compatible: "lora-llcc68"
+
+include: spi-device.yaml

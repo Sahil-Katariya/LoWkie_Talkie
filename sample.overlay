@@ -1,0 +1,51 @@
+/ {
+	aliases {
+		// These aliases help main.c find the pins if it uses DT_ALIAS
+		lora0 = &sx1262;
+	};
+};
+
+&spi0 {
+	compatible = "nordic,nrf-spi";
+	status = "okay";
+	cs-gpios = <&gpio1 12 GPIO_ACTIVE_LOW>;
+	pinctrl-0 = <&lora_default>;
+	pinctrl-1 = <&lora_sleep>;
+	pinctrl-names = "default", "sleep";
+
+	// LABEL MUST BE 'sx1262' to match the driver's expectation
+	sx1262: lora@0 {
+		// COMPATIBLE MUST BE 'semtech,sx1262' to match the driver binding
+		compatible = "semtech,sx1262";
+		reg = <0>;
+		spi-max-frequency = <125000>;
+
+		// GPIOs must be defined INSIDE the device node for the driver to find them
+		reset-gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
+		
+		// Note: You had P0.07 for both Busy and RX_EN. This is likely a conflict.
+		// I have assigned P0.07 to BUSY here. Check your schematic!
+		busy-gpios  = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+		
+		dio1-gpios  = <&gpio1 8 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&pinctrl {
+	lora_default: lora_default {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+					<NRF_PSEL(SPIM_MOSI, 1, 14)>,
+					<NRF_PSEL(SPIM_MISO, 1, 15)>;
+		};
+	};
+
+	lora_sleep: lora_sleep {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+					<NRF_PSEL(SPIM_MOSI, 1, 14)>,
+					<NRF_PSEL(SPIM_MISO, 1, 15)>;
+			low-power-enable;
+		};
+	};
+};

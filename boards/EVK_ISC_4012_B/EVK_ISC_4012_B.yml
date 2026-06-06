@@ -1,0 +1,10 @@
+identifier: EVK_ISC_4012_B/nrf52840
+name: Evaluation board for ISC-4012-B Module
+vendor: Indiesemic
+type: mcu
+arch: arm
+ram: 256
+flash: 1024
+toolchain:
+  - zephyr
+supported: []

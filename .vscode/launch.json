@@ -1,0 +1,12 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "nrf-connect",
+			"request": "launch",
+			"name": "Launch LoWkie_Transmit/build/LoWkie_Transmit",
+			"config": "${workspaceFolder}/build/LoWkie_Transmit",
+			"runToEntryPoint": "main"
+		}
+	]
+}
