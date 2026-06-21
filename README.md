@@ -7,27 +7,26 @@ LoWkie_Talkie is a half-duplex digital walkie-talkie project that transmits comp
 
 ## Features
 - **Half-Duplex Communication**: Push-to-Talk (PTT) operation with automatic RX/TX switching.
-- **LoRa Transceiver**: Custom driver implementation for Semtech SX126x / LLCC68 modules over SPI.
+- **LoRa Transceiver**: Custom driver implementation for SX126x modules over SPI.
 - **Jitter Buffer**: Handles packet loss, out-of-order packets, and latency variations for smooth audio reconstruction.
 - **Hardware Agnostic**: Built on Zephyr RTOS, making it easy to port to various boards via devicetree overlays.
 - **I2S Audio Pipeline**: Support for I2S digital microphones and DACs.
 
 ## Hardware Requirements
 - **Microcontroller**: Nordic nRF54L15 DK or nRF52840 DK (or any Zephyr-supported board with sufficient RAM/Flash).
-- **LoRa Module**: Semtech SX1262 / LLCC68.
+- **LoRa Module**: Semtech SX1262.
 - **Audio Interface**: I2S Digital Microphone (e.g., INMP441) and I2S DAC/Speaker.
 - **Miscellaneous**: A push button for PTT functionality.
 
 ## Software Dependencies
 - [Zephyr RTOS](https://zephyrproject.org/) framework
 - [Speex DSP library](https://www.speex.org/) (Integer API)
-- Nordic nRF Connect SDK (if building for Nordic dev boards)
+- Nordic nRF Connect SDK
 
 ## Project Structure
 - `src/main.c`: Core application logic, thread definitions, audio pipeline, and transceiver state machine.
 - `src/packet.h`: Definition of the LoRa packet structure (`lowkie_packet_t`).
 - `src/audio_data.h`: Stored PCM test audio data for debugging without a live microphone.
-- `lib/llcc68_driver.h` & `.c`: Low-level SPI driver for the Semtech LLCC68/SX1262 LoRa module.
 - `boards/`: Zephyr devicetree overlay files for hardware-specific pin mappings (SPI, I2S, GPIOs).
 - `prj.conf`: Zephyr configuration file enabling necessary subsystems (SPI, GPIO, I2S, Logging, IPC, IPC queues).
 - `CMakeLists.txt`: Build script for the Zephyr environment.
